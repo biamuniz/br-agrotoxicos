@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasil, país dos agrotóxicos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+		<a class="top-brand" href="https://apublica.org/" title="Home">Agência Pública</a>
+    </header>
+	<main>
+		<section id="capa">
+			<h1>Brasil, país dos agrotóxicos</h1>
+		</section>
+		<section id="intro">
+			<p class="texto-intro"> Ao longo de dez anos, 19.852 pessoas foram intoxicadas com agrotóxicos no Brasil.</p> 
+			<img src="assets/girl-with-a-pearl-earing-by-vermeer.jpg" class="img-opening" />
+			<p class="texto-intro"> Essas intoxicações levaram a X.XXX mil mortes.</p>
+			<img src="assets/girl-with-a-pearl-earing-by-vermeer.jpg" class="img-opening" />
+			<p class="texto-intro"> A Agência Pública mostra quando, onde e com quem esses casos aconteceram.</p>
+			<img src="assets/girl-with-a-pearl-earing-by-vermeer.jpg" class="img-opening" />
+		</section>
+		<section id="scrolly">
+			<article>
+				<div class="step" data-step="1" style="height: 300px;" data-scrollama-index="0">
+					<p>A primeira notificação é do dia 1º de janeiro de 2010. Um homem, de 23 anos, intoxicado na cidade de Maringá, no Paraná.</p>
+				</div>
+				<div class="step is-active" data-step="2" style="height: 300px;" data-scrollama-index="1">
+					<p>A última notificação registrada, do dia 31 de dezembro de 2019, é de uma intoxicação em Bento Gonçalves, no Rio Grande do Sul. A paciente é mulher de 51 anos</p>
+				</div>
+			</article>
+
+			<figure style="height: 308.5px; top: 154.25px;">
+				<p>4</p>
+			</figure>
+		</section>
+
+		<section id="outro">
+			<div class="antes-mapa">
+				<p>Veja no mapa onde essas intoxicações aconteceram:</p> 
+			</div>
+			<div class="flourish-embed flourish-map" data-src="visualisation/9259941"><script src="https://public.flourish.studio/resources/embed.js"></script>
+			</div>
+		</section>
+	</main>
+
+	<!-- <div class='debug'></div> -->
+	<script src="d3.min.js.download"></script>
+	<script src="scrollama.min.js.download"></script>
+	<script>
+		// using d3 for convenience
+		var main = d3.select("main");
+		var scrolly = main.select("#scrolly");
+		var figure = scrolly.select("figure");
+		var article = scrolly.select("article");
+		var step = article.selectAll(".step");
+
+		// initialize the scrollama
+		var scroller = scrollama();
+
+		// generic window resize listener event
+		function handleResize() {
+			// 1. update height of step elements
+			var stepH = Math.floor(window.innerHeight * 0.75);
+			step.style("height", stepH + "px");
+
+			var figureHeight = window.innerHeight / 2;
+			var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+			figure
+				.style("height", figureHeight + "px")
+				.style("top", figureMarginTop + "px");
+
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+		}
+
+		// scrollama event handlers
+		function handleStepEnter(response) {
+			console.log(response);
+			// response = { element, direction, index }
+
+			// add color to current step only
+			step.classed("is-active", function (d, i) {
+				return i === response.index;
+			});
+
+			// update graphic based on step
+			figure.select("p").text(response.index + 1);
+		}
+
+		function setupStickyfill() {
+			d3.selectAll(".sticky").each(function () {
+				Stickyfill.add(this);
+			});
+		}
+
+		function init() {
+			setupStickyfill();
+
+			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+			handleResize();
+
+			// 2. setup the scroller passing options
+			// 		this will also initialize trigger observations
+			// 3. bind scrollama event handlers (this can be chained like below)
+			scroller
+				.setup({
+					step: "#scrolly article .step",
+					offset: 0.33,
+					debug: false
+				})
+				.onStepEnter(handleStepEnter);
+		}
+
+		// kick things off
+		init();
+	</script>
+
+
+</body></html>
