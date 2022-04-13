@@ -133,22 +133,6 @@ body {
 }
 
 
-p.intro{
-    position: absolute;
-    width: 636px;
-    height: 120px;
-    left: 401px;
-    top: 1948px; 
-    font-family: 'Bitter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 44px;
-    line-height: 60px;
-    text-align: center;
-    
-    color: #ffffff;
-}
-
 #scrolly{
   background-color: #663399;
 }
