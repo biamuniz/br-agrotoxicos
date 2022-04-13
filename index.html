@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasil, país dos agrotóxicos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="https://apublica.org/">
+        <img src="https://apublica.org/wp-content/themes/apublica3/assets/logo-black.small.png" alt="Agência Pública" height="35" >
+      </a>
+    </nav>
+  </header>
+  <main>
+    <section id="capa">
+      <div class="imagemdefundo">
+        <div class="imagembrasil">
+          <h1>
+            <span class="destaque"> Brasil, país dos agrotóxicos</span>
+          </h1>
+        </div>
+      </div>	
+    </section>
+    <section id="scrollytelling">
+      <figure>
+        <div style="text-align:center; height:100%; width:100%">
+          <img src="img/1.png" height="100%" width ="auto" id="imgV1" style="opacity:0"> 
+          <img src="img/2.png" height="100%" width ="auto" id="imgV2" style="opacity:0">
+          <img src="img/3.png" height="100%" width ="auto" id="imgV3" style="opacity:0">
+          <img src="img/4.png" height="100%" width ="auto" id="imgV4" style="opacity:0">
+          <img src="img/5.png" height="100%" width ="auto" id="imgV5" style="opacity:0">
+          <img src="img/6.png" height="100%" width ="auto" id="imgV6" style="opacity:0">       
+       </div>
+      </figure>
+
+      <article>
+        <div class="step">
+          <p>Ao longo de dez anos, <span class="destaque">19.852</span> pessoas foram intoxicadas com agrotóxicos no Brasil.</p>
+       </div>
+       <div class="step">
+         <p>Essas intoxicações levaram a <span class="destaque">X.XXX</span> mortes.</p>
+        </div>
+        <div class="step">
+          <p>A Agência Pública mostra <span class="destaque">quando, onde e com quem</span> esses casos aconteceram.</p>
+        </div>
+        <div class="step">
+          <p>A primeira notificação é de 1º de janeiro de 2010. Um homem de 23 anos foi intoxicado em Maringá, no Paraná.</p>
+        </div>
+        <div class="step">
+          <p>A última notificação registrada, do dia 31 de dezembro de 2019, é de uma intoxicação em Bento Gonçalves, no Rio Grande do Sul. A paciente é mulher de 51 anos</p>
+        </div>
+        <div class="step">
+          <p>Veja no mapa interativo onde elas aconteceram.</p>
+        </div>
+      </article>
+    </section>
+    <section id="outro">
+      <div class="flourish-embed flourish-map" data-src="visualisation/9259941"><script src="https://public.flourish.studio/resources/embed.js"></script>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/intersection-observer"></script>
+  <script src="https://unpkg.com/scrollama"></script>
+
+  <script>
+    var myScrollama = scrollama();
+    const figureHeight = window.innerHeight * 1
+    const figureMarginTop = (window.innerHeight - figureHeight) / 2
+    const stepH = Math.floor(window.innerHeight * 1.8);
+
+    var figure = d3.select('figure');
+    var imgV1 = d3.select('#imgV1');
+    var imgV2 = d3.select('#imgV2');
+    var imgV3 = d3.select('#imgV3');
+    var imgV4 = d3.select('#imgV4');
+    var imgV5 = d3.select('#imgV5');
+    var imgV6 = d3.select('#imgV6');
+
+    var article = d3.select('article');
+    var steps = d3.selectAll('.step');
+
+    function handleResize() {
+      
+      console.log("handling resize")
+
+      steps.style('height', stepH + 'px');
+      figure
+        .style('height', figureHeight + 'px')
+        .style('top', figureMarginTop + 'px')
+
+      imgMargin = (figure.node().getBoundingClientRect().width - imgV1.node().getBoundingClientRect().width) / 2
+
+      imgV1.style('left', imgMargin + 'px')
+      imgV2.style('left', imgMargin + 'px')
+      imgV3.style('left', imgMargin + 'px')
+      imgV4.style('left', imgMargin + 'px')
+      imgV5.style('left', imgMargin + 'px')
+      imgV6.style('left', imgMargin + 'px')
+  
+  
+      myScrollama.resize();
+
+    }
+
+    function handleStepChange(response) {
+    
+      console.log(response)
+      switch(response.index) {
+
+        case 0:
+          imgV1.style("opacity", "1")
+          imgV2.style("opacity", "0")
+          imgV3.style("opacity", "0")
+          imgV4.style("opacity", "0")
+          imgV5.style("opacity", "0")
+          imgV6.style("opacity", "0")
+          break;
+        
+        case 1:
+          // Set image to third version
+          imgV1.style("opacity", "0")
+          imgV2.style("opacity", "1")
+          imgV3.style("opacity", "0")
+          imgV4.style("opacity", "0")
+          imgV5.style("opacity", "0")
+          imgV6.style("opacity", "0")
+          break;
+
+        case 2:
+          // Set image to third version
+          imgV1.style("opacity", "0")
+          imgV2.style("opacity", "0")
+          imgV3.style("opacity", "1")
+          imgV4.style("opacity", "0")
+          imgV5.style("opacity", "0")
+          imgV6.style("opacity", "0")
+          break;
+
+        case 3:
+          // Set image to third version
+          imgV1.style("opacity", "0")
+          imgV2.style("opacity", "0")
+          imgV3.style("opacity", "0")
+          imgV4.style("opacity", "1")
+          imgV5.style("opacity", "0")
+          imgV6.style("opacity", "0")
+          break;
+
+          case 4:
+          // Set image to third version
+          imgV1.style("opacity", "0")
+          imgV2.style("opacity", "0")
+          imgV3.style("opacity", "0")
+          imgV4.style("opacity", "0")
+          imgV5.style("opacity", "1")
+          imgV6.style("opacity", "0")
+          break;
+
+          case 5:
+          // Set image to third version
+          imgV1.style("opacity", "0")
+          imgV2.style("opacity", "0")
+          imgV3.style("opacity", "0")
+          imgV4.style("opacity", "0")
+          imgV5.style("opacity", "0")
+          imgV6.style("opacity", "1")
+          break;
+                
+
+        default:
+          // do nothing
+          break;
+
+      }
+
+    }
+
+    function init() {
+
+      imgV1.style("opacity", "1")
+      handleResize();
+      myScrollama.setup({
+        step: '.step',
+        offset: Math.floor(window.innerHeight) * 1.3 + "px",
+        debug: false,
+      }).onStepEnter(handleStepChange)
+        
+      window.addEventListener('resize', handleResize);
+    }
+
+    init();
+
+  </script>
+
+</body>
+
+</html>
