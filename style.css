@@ -23,10 +23,8 @@ header{
   height: 40px;
   padding-left: 30px;
   z-index: 9999;
-}
-
-#capa{  
-}
+  font-family: 'Bitter', serif;
+  font-size: 30px;}
 
 .imagemdefundo{
   background-image: url("https://64.media.tumblr.com/6ebf6d96d595445613a46a71ed11572c/tumblr_pmd6e6Ol7y1runoqyo9_r1_540.gifv");
@@ -134,3 +132,15 @@ figure img {
     padding: 1rem;
     opacity: 0.95
   }
+
+.bottom {
+  padding: 2rem 0;
+  background-color: #663399;
+}
+.sobre{
+  color: #fff;
+  font-family: 'Bitter';
+  font-size: 20px;
+  text-align: center;
+  margin-left: 3%;
+}
