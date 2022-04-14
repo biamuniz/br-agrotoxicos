@@ -22,6 +22,7 @@ header{
   width: 100%;
   height: 40px;
   padding-left: 30px;
+  z-index: 9999;
 }
 
 #capa{  
@@ -56,6 +57,10 @@ h1{
   background-color: #242424;
   color: #ffffff;
   margin: 2px;
+}
+
+.destaquecor{
+  color: #ffdd40;
 }
 
 #intro{
